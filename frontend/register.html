@@ -9,21 +9,23 @@
 <body>
   <div class="login-container">
     <h2>Registro</h2>
-    <form action="/register" method="POST">
-      <h5>Nombre</h5>
-      <input type="text" name="nombre" placeholder="Maria de los Angeles" required>
-      <h5>Apellidos</h5>
-      <input type="text" name="apellidos" placeholder="Felix Guereña" required>
-      <h5>Correo</h5>
-      <input type="email" name="correo" placeholder="ejemplo123@gmail.com" required>
-      <h5>Contraseña</h5>
-      <input type="password" name="password" placeholder="***********" required>
-      <h5>Telefono</h5>
-      <input type="tel" name="telefono" placeholder="6189823456" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-      <h5>Fecha de nacimiento</h5>
-      <input type="date" name="fecha_nacimiento" required>
+    <form action="/register" method="POST"><!-- -->
       
-      <button type="submit">Registrarse</button>
+      <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" placeholder="Maria de los Angeles" required>
+      <label for="apellido">Apellidos</label>
+        <input type="text" name="apellidos" placeholder="Felix Guereña" required>
+      <label for="correo">Correo</label>
+        <input type="email" name="correo" placeholder="ejemplo123@gmail.com" required>
+      <label for="password">Contraseña</label>
+        <input type="password" name="password" placeholder="***********" required>
+      <label for="telefono">Telefono</label>
+        <input type="tel" name="telefono" placeholder="6189823456" required>
+      <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+        <input type="date" name="fecha_nacimiento" required>
+      
+      <button type="submit" id="btn_registrarse">Registrarse</button>
+
     </form>
     <p>Ya tienes cuenta? <a href="login.html">Iniciar Sesion</a></p>
   </div>

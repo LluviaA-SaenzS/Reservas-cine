@@ -10,11 +10,14 @@
   <div class="login-container">
     <h2>Iniciar Sesion</h2>
     <form action="/login" method="POST">
-      <h5>Usuario</h5>
-      <input type="text" name="username" placeholder="Nombre o correo electronico" required>
-      <h5>Contraseña</h5>
-      <input type="password" name="password" placeholder="***********" required>
-      <button type="submit">Iniciar Sesion</button>
+      
+      <label for="usuario">Usuario</label>
+        <input type="text" name="usuario" placeholder="Nombre o correo electronico" required>
+      <label for="password">Contraseña</label>
+        <input type="password" name="password" placeholder="***********" required>
+
+      <button type="submit" id="btn_iniciarsesion">Iniciar Sesion</button>
+
     </form>
     <p>No tienes una cuenta? <a href="register.html">Registrarse</a></p>
   </div>

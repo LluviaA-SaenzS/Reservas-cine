@@ -4,20 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cine</title>
+    <link rel="stylesheet" href="style_index.css">
 </head>
 <body>
-    <header>
-        <h2>CinePequeño </h2>
-            <button type="button" id="loginBtn" class="btn-primary">
-                Iniciar Sesión
-            </button>
-            <button type="button" id="registerBtn" class="btn-secondary">
-                Registrarse
-            </button>
-    </header>
-        <p>carrusel preestreno</p>
-        <p>cartelera</p>
-    
+    <header> <!-- ---------------------------------------------- CABECERA ---------------------------------------------- -->
+        <h2>CinePequeño</h2>
+        <nav>
+            <ul>
+                <li class="nav-item">
+
+                    <button id="btnCines">Ubica tu cine</button><!-- boton -->
+
+                    <div id="menuCines" class="menu-flotante oculto">
+                        <h3>Cines disponibles</h3>
+                        <ul id="listaCines"></ul>
+                    </div>
+                </li>
+                    <li class="nav-item">
+                        <a href="login.html">Iniciar Sesión</a> <!-- link -->
+                    </li>
+                    <li class="nav-item">
+                        <a href="register.html">Registrarse</a> <!-- link -->
+                    </li>
+            </ul>
+        </nav>
+    </header> <!-- ---------------------------------------------- FIN CABECERA ---------------------------------------------- -->
+
+        <p>carrusel peliculas</p>
+        <p>cartelera | Horarios</p> 
+        
     <footer>
 
     </footer>    
