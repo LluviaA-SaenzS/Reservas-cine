@@ -49,3 +49,23 @@ nav button:hover {
 .oculto {
   display: none;
 }
+/* ------------------ seccion cartelera | horarios -------------------- */
+/*
+.seccion-titulo {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+.seccion-titulo button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #444;
+}
+
+.seccion-titulo button.activo {
+  color: #007BFF;
+  text-decoration: underline;
+}*/
