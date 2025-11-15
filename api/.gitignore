@@ -3,3 +3,6 @@ node_modules/
 *.env
 .ini.env
 
+mv .gitignore api/
+
+
