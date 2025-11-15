@@ -1,4 +1,4 @@
-import { db } from "C:\Users\PC1\OneDrive - Instituto Tecnologico de Durango\Escritorio\Proyecto Cine\Reservas-cine\api\src\db.js";
+import { db } from "../db.js";
 
 export const obtenerCines = async (req, res) => {
     try {

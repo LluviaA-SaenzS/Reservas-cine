@@ -1,5 +1,5 @@
 import express from "express";
-import { obtenerCines } from "C:\Users\PC1\OneDrive - Instituto Tecnologico de Durango\Escritorio\Proyecto Cine\Reservas-cine\api\src\controllers\cinesController.js";
+import { obtenerCines } from "../controllers/cinesController.js";
 
 const router = express.Router();
 
