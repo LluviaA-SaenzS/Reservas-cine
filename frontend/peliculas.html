@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peliculas form</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Meter Peliculas</h2>
+        <form action="/peliculas" method="POST">
+            <label for="titulo">Titulo</label>
+                <input type="text" name="titulo" placeholder="Titanic" required>
+            <label for="duracion">Duracion (minutos)</label>
+                <input type="number" name="titulo" placeholder="96" required>
+            <label for="clasificacion">Clasificacion</label>
+               <select id="clasificacion" name="clasificacion" required>
+                <option value="">Seleccione...</option>
+                <option value="A">A</option>
+                <option value="AA">AA</option>
+                <option value="B">B</option>
+                <option value="B15">B15</option>
+                <option value="C">C</option>
+                <option value="D">C</option>     
+            </select>
+            <label for="sinopsis">Sinopsis</label>
+            <textarea id="sinopsis"></textarea>
+            <label for="idioma">Idioma</label>
+                <input type="checkbox" id="idioma1" name="idioma1" value="Original">
+                    <label for="idioma1">Original</label><br>
+                <input type="checkbox" id="idioma2" name="idioma2" value="Espanol">
+                    <label for="idioma2">Español</label><br>  
+                <input type="checkbox" id="idioma3" name="idioma3" value="Ingles">
+                    <label for="idioma3">Ingles</label><br>        
+
+            
+        </form>
+    </div>
+</body>
+</html>
