@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor del formulario */
+.form-peliculas-container {
+    width: 450px;
+    margin: 40px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-peliculas-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo general de labels e inputs */
+.form-peliculas-container label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.form-peliculas-container input[type="text"],
+.form-peliculas-container input[type="number"],
+.form-peliculas-container input[type="date"],
+.form-peliculas-container input[type="file"],
+.form-peliculas-container select,
+.form-peliculas-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+/* Textarea más grande */
+.form-peliculas-container textarea {
+    height: 90px;
+    resize: vertical;
+}
+
+/* Checkboxes alineados */
+.checkbox-group {
+    margin-top: 10px;
+}
+
+.checkbox-group label {
+    font-weight: normal;
+}
+
+/* Botón */
+#btn_insertar_pelicula {
+    width: 100%;
+    padding: 12px;
+    background: #0077cc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#btn_insertar_pelicula:hover {
+    background: #005fa3;
+}

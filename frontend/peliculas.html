@@ -4,37 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peliculas form</title>
+    <link rel="stylesheet" href="style_form_peliculas.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Meter Peliculas</h2>
-        <form action="/peliculas" method="POST">
-            <label for="titulo">Titulo</label>
-                <input type="text" name="titulo" placeholder="Titanic" required>
-            <label for="duracion">Duracion (minutos)</label>
-                <input type="number" name="titulo" placeholder="96" required>
-            <label for="clasificacion">Clasificacion</label>
-               <select id="clasificacion" name="clasificacion" required>
+    <div class="form-peliculas-container">
+        <h2>Meter Películas</h2>
+
+        <form action="/peliculas" method="POST" id="form-peliculas" enctype="multipart/form-data">
+
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo" placeholder="Titanic" required>
+
+            <label for="duracion_minutos">Duración (minutos)</label>
+            <input type="number" name="duracion_minutos" placeholder="96" required>
+
+            <label for="clasificacion">Clasificación</label>
+            <select id="clasificacion" name="clasificacion" required>
                 <option value="">Seleccione...</option>
                 <option value="A">A</option>
                 <option value="AA">AA</option>
                 <option value="B">B</option>
                 <option value="B15">B15</option>
                 <option value="C">C</option>
-                <option value="D">C</option>     
+                <option value="D">D</option>
             </select>
-            <label for="sinopsis">Sinopsis</label>
-            <textarea id="sinopsis"></textarea>
-            <label for="idioma">Idioma</label>
-                <input type="checkbox" id="idioma1" name="idioma1" value="Original">
-                    <label for="idioma1">Original</label><br>
-                <input type="checkbox" id="idioma2" name="idioma2" value="Espanol">
-                    <label for="idioma2">Español</label><br>  
-                <input type="checkbox" id="idioma3" name="idioma3" value="Ingles">
-                    <label for="idioma3">Ingles</label><br>        
 
-            
+            <label for="sinopsis">Sinopsis</label>
+            <textarea id="sinopsis" name="sinopsis"></textarea>
+
+            <label>Idioma</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="idioma[]" value="Original">Original
+                <input type="checkbox" name="idioma[]" value="Espanol">Español
+                <input type="checkbox" name="idioma[]" value="Inglés">Ingles
+            </div>
+
+            <label>Subtítulos</label><!-- SUBTITULOS ---------------------------------------------->
+            <div class="checkbox-group">
+                <input type="checkbox" name="subtitulos[]" value="No"> No disponible
+                <input type="checkbox" name="subtitulos[]" value="Espanol">Español
+                <input type="checkbox" name="subtitulos[]" value="Inglés">Ingles
+            </div>
+
+            <label>Géneros</label>
+            <div class="generos-container">
+                <input type="checkbox" name="generos[]" value="1"> Acción<br>
+                <input type="checkbox" name="generos[]" value="2"> Aventura<br>
+                <input type="checkbox" name="generos[]" value="3"> Comedia<br>
+                <input type="checkbox" name="generos[]" value="4"> Drama<br>
+                <input type="checkbox" name="generos[]" value="5"> Terror<br>
+                <input type="checkbox" name="generos[]" value="6"> Ciencia Ficcion<br>
+                <input type="checkbox" name="generos[]" value="7"> Fantasia<br>
+                <input type="checkbox" name="generos[]" value="8"> Suspenso<br>
+                <input type="checkbox" name="generos[]" value="9"> Romance<br>
+                <input type="checkbox" name="generos[]" value="10"> Animacion<br>
+                <input type="checkbox" name="generos[]" value="11"> Musical<br>
+                <input type="checkbox" name="generos[]" value="12"> Documental<br>
+                <input type="checkbox" name="generos[]" value="13"> Western<br>
+                <input type="checkbox" name="generos[]" value="14"> Crimen<br>
+                <input type="checkbox" name="generos[]" value="15"> Misterio<br>
+                <input type="checkbox" name="generos[]" value="16"> Biografia<br>
+                <input type="checkbox" name="generos[]" value="17"> Historico<br>
+                <input type="checkbox" name="generos[]" value="18"> Familiar<br>
+                <input type="checkbox" name="generos[]" value="19"> Deportes<br>
+                <input type="checkbox" name="generos[]" value="20"> Guerra<br>
+      
+
+            </div>
+
+            <label for="fecha_estreno">Fecha de Estreno</label>
+            <input type="date" name="fecha_estreno" required>
+
+            <label for="imagen_pelicula">Imagen</label>
+            <input type="file" name="imagen_pelicula">
+
+            <button type="submit" id="btn_insertar_pelicula">
+                Insertar Película
+            </button>
         </form>
     </div>
+
+    <script src="js/btnpeliculas.js"></script>
 </body>
+
 </html>
