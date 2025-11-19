@@ -4,30 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style_form_funciones.css">
 </head>
 <body>
+   <div class="form-funciones-container">
+    <h2>Crear Nueva Función</h2>
+
     <form id="form-funcion">
-        <label for="id_pelicula">Pelicula</label>
-            <select name="id_pelicula" id="selPeliculas"></select>
-        <label for="id_sala">Sala</label>    
-            <select name="id_sala" id="selSalas"></select>
-        <label for="ide_horario">Horario</label>    
-            <select name="id_horario" id="selHorarios"></select>
+        
+        <!-- Película -->
+        <label for="id_pelicula">Película *</label>
+        <select name="id_pelicula" id="selPeliculas" required>
+            <option value="">Seleccione una película...</option>
+            <!-- Se llena dinámicamente -->
+        </select>
+        <small id="duracion-pelicula" class="info-text"></small>
 
-    <input type="date" name="fecha">
-    <label for="clasificacion">Precio</label>
-        <input type="number" name="precio" step="0.01">
+        <!-- Cine (opcional si tienes múltiples cines) -->
+        <label for="id_cine">Cine *</label>
+        <select name="id_cine" id="selCines" required>
+            <option value="">Seleccione un cine...</option>
+            <!-- Se llena dinámicamente -->
+        </select>
 
-    <label for="estado">Estado</label>
-    <select name="estado">
-        <option value="disponible">Disponible</option>
-        <option value="llena">Llena</option>
-        <option value="finalizada">Finalizada</option>
-        <option value="cancelada">Cancelada</option>
-    </select>
+        <!-- Sala -->
+        <label for="id_sala">Sala *</label>
+        <select name="id_sala" id="selSalas" required disabled>
+            <option value="">Primero seleccione un cine...</option>
+            <!-- Se llena dinámicamente según el cine -->
+        </select>
+        <small id="info-sala" class="info-text"></small>
 
-    <button type="submit">Crear función</button>
-</form>
+        <!-- Fecha -->
+        <label for="fecha">Fecha *</label>
+        <input type="date" name="fecha" id="fecha" required>
 
+        <!-- Hora de inicio -->
+        <label for="hora_inicio">Hora de Inicio *</label>
+        <input type="time" name="hora_inicio" id="hora_inicio" 
+               min="10:00" max="23:00" required>
+        <small class="info-text">Horario: 10:00 AM - 11:00 PM</small>
+        
+        <!-- Hora fin (calculada automáticamente) -->
+        <label for="hora_fin">Hora de Fin (calculada)</label>
+        <input type="time" name="hora_fin" id="hora_fin" readonly disabled>
+
+        <!-- Precio -->
+        <label for="precio_base">Precio Base *</label>
+        <input type="number" name="precio_base" id="precio_base" 
+               step="0.01" min="0" placeholder="50.00" required>
+
+        <!-- ⭐ NO incluir estado - siempre será "disponible" al crear -->
+
+        <button type="submit" id="btn-crear-funcion">
+            Crear Función
+        </button>
+    </form>
+</div>
+
+ <script src="js/btnfunciones.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cinesRouter from "./routes/cines.js";
 import peliculasRouter from "./routes/peliculas.js";
 import funcionesRouter from "./routes/funciones.js";
+import salasRouter from "./routes/salas.js";
 
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/cines", cinesRouter);
 app.use("/api/peliculas", peliculasRouter);
 app.use("/api/funciones", funcionesRouter);
+app.use("/api/salas", salasRouter);
 
 
 const PORT = process.env.PORT || 3006;

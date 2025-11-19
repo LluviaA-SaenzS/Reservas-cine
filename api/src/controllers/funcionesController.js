@@ -122,13 +122,13 @@ export const insertarFuncion = async (req, res) => {
     `, [idFuncion, id_sala]);
 
     await connection.commit();
-    
+
     res.json({ 
-      message: "Función creada correctamente",
-      id_funcion: idFuncion,
-      hora_inicio,
-      hora_fin
-    });
+    message: "Función creada correctamente",
+    id_funcion: idFuncion,
+    hora_inicio: hora_inicio,  // ⭐ Asegúrate de usar snake_case
+    hora_fin: horaFin          // ⭐ Cambia de horaFin a hora_fin
+  });
 
   } catch (error) {
     await connection.rollback();
