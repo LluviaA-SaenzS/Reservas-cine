@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2025 at 12:41 AM
+-- Generation Time: Nov 19, 2025 at 02:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1654,11 +1654,21 @@ CREATE TABLE `funciones` (
   `id_funcion` int(11) NOT NULL,
   `id_pelicula` int(11) NOT NULL,
   `id_sala` int(11) NOT NULL,
-  `id_horario` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `estado` enum('Disponible','Llena','Cancelada','Finalizada') DEFAULT 'Disponible',
-  `precio_base` decimal(8,2) NOT NULL
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL,
+  `estado` enum('disponible','en_curso','finalizada','cancelada') DEFAULT 'disponible',
+  `precio_base` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `funciones`
+--
+
+INSERT INTO `funciones` (`id_funcion`, `id_pelicula`, `id_sala`, `fecha`, `hora_inicio`, `hora_fin`, `estado`, `precio_base`) VALUES
+(1, 2, 1, '2025-11-26', '10:00:00', '11:56:00', 'disponible', 75.00),
+(2, 2, 1, '2025-11-20', '10:00:00', '11:56:00', 'disponible', 75.00),
+(3, 2, 1, '2025-11-20', '12:00:00', '13:56:00', 'disponible', 75.00);
 
 -- --------------------------------------------------------
 
@@ -1672,6 +1682,132 @@ CREATE TABLE `funciones_asientos` (
   `id_asiento` int(11) NOT NULL,
   `disponible` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `funciones_asientos`
+--
+
+INSERT INTO `funciones_asientos` (`id_boleto`, `id_funcion`, `id_asiento`, `disponible`) VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 1),
+(3, 1, 3, 1),
+(4, 1, 4, 1),
+(5, 1, 5, 1),
+(6, 1, 6, 1),
+(7, 1, 7, 1),
+(8, 1, 8, 1),
+(9, 1, 9, 1),
+(10, 1, 10, 1),
+(11, 1, 11, 1),
+(12, 1, 12, 1),
+(13, 1, 13, 1),
+(14, 1, 14, 1),
+(15, 1, 15, 1),
+(16, 1, 16, 1),
+(17, 1, 17, 1),
+(18, 1, 18, 1),
+(19, 1, 19, 1),
+(20, 1, 20, 1),
+(21, 1, 21, 1),
+(22, 1, 22, 1),
+(23, 1, 23, 1),
+(24, 1, 24, 1),
+(25, 1, 25, 1),
+(26, 1, 26, 1),
+(27, 1, 27, 1),
+(28, 1, 28, 1),
+(29, 1, 29, 1),
+(30, 1, 30, 1),
+(31, 1, 31, 1),
+(32, 1, 32, 1),
+(33, 1, 33, 1),
+(34, 1, 34, 1),
+(35, 1, 35, 1),
+(36, 1, 36, 1),
+(37, 1, 37, 1),
+(38, 1, 38, 1),
+(39, 1, 39, 1),
+(40, 1, 40, 1),
+(64, 2, 1, 1),
+(65, 2, 2, 1),
+(66, 2, 3, 1),
+(67, 2, 4, 1),
+(68, 2, 5, 1),
+(69, 2, 6, 1),
+(70, 2, 7, 1),
+(71, 2, 8, 1),
+(72, 2, 9, 1),
+(73, 2, 10, 1),
+(74, 2, 11, 1),
+(75, 2, 12, 1),
+(76, 2, 13, 1),
+(77, 2, 14, 1),
+(78, 2, 15, 1),
+(79, 2, 16, 1),
+(80, 2, 17, 1),
+(81, 2, 18, 1),
+(82, 2, 19, 1),
+(83, 2, 20, 1),
+(84, 2, 21, 1),
+(85, 2, 22, 1),
+(86, 2, 23, 1),
+(87, 2, 24, 1),
+(88, 2, 25, 1),
+(89, 2, 26, 1),
+(90, 2, 27, 1),
+(91, 2, 28, 1),
+(92, 2, 29, 1),
+(93, 2, 30, 1),
+(94, 2, 31, 1),
+(95, 2, 32, 1),
+(96, 2, 33, 1),
+(97, 2, 34, 1),
+(98, 2, 35, 1),
+(99, 2, 36, 1),
+(100, 2, 37, 1),
+(101, 2, 38, 1),
+(102, 2, 39, 1),
+(103, 2, 40, 1),
+(127, 3, 1, 1),
+(128, 3, 2, 1),
+(129, 3, 3, 1),
+(130, 3, 4, 1),
+(131, 3, 5, 1),
+(132, 3, 6, 1),
+(133, 3, 7, 1),
+(134, 3, 8, 1),
+(135, 3, 9, 1),
+(136, 3, 10, 1),
+(137, 3, 11, 1),
+(138, 3, 12, 1),
+(139, 3, 13, 1),
+(140, 3, 14, 1),
+(141, 3, 15, 1),
+(142, 3, 16, 1),
+(143, 3, 17, 1),
+(144, 3, 18, 1),
+(145, 3, 19, 1),
+(146, 3, 20, 1),
+(147, 3, 21, 1),
+(148, 3, 22, 1),
+(149, 3, 23, 1),
+(150, 3, 24, 1),
+(151, 3, 25, 1),
+(152, 3, 26, 1),
+(153, 3, 27, 1),
+(154, 3, 28, 1),
+(155, 3, 29, 1),
+(156, 3, 30, 1),
+(157, 3, 31, 1),
+(158, 3, 32, 1),
+(159, 3, 33, 1),
+(160, 3, 34, 1),
+(161, 3, 35, 1),
+(162, 3, 36, 1),
+(163, 3, 37, 1),
+(164, 3, 38, 1),
+(165, 3, 39, 1),
+(166, 3, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -1713,18 +1849,6 @@ INSERT INTO `generos` (`id_genero`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `horarios`
---
-
-CREATE TABLE `horarios` (
-  `id_horario` int(11) NOT NULL,
-  `hora_inicio` time NOT NULL,
-  `hora_fin` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `membresia`
 --
 
@@ -1760,6 +1884,13 @@ CREATE TABLE `peliculas` (
   `imagen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `peliculas`
+--
+
+INSERT INTO `peliculas` (`id_pelicula`, `titulo`, `duracion_minutos`, `clasificacion`, `sinopsis`, `idioma`, `subtitulos`, `fecha_estreno`, `imagen`) VALUES
+(2, 'probando', 86, 'A', 'erizo velocista azul', '[\"Espanol\",\"Inglés\"]', '[\"No\"]', '2025-11-19', '/uploads/1763513296297.webp');
+
 -- --------------------------------------------------------
 
 --
@@ -1770,6 +1901,15 @@ CREATE TABLE `peliculas_generos` (
   `id_pelicula` int(11) NOT NULL,
   `id_genero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `peliculas_generos`
+--
+
+INSERT INTO `peliculas_generos` (`id_pelicula`, `id_genero`) VALUES
+(2, 1),
+(2, 10),
+(2, 18);
 
 -- --------------------------------------------------------
 
@@ -1891,9 +2031,8 @@ ALTER TABLE `descuentos`
 --
 ALTER TABLE `funciones`
   ADD PRIMARY KEY (`id_funcion`),
-  ADD KEY `id_pelicula` (`id_pelicula`),
-  ADD KEY `id_sala` (`id_sala`),
-  ADD KEY `id_horario` (`id_horario`);
+  ADD UNIQUE KEY `unique_sala_fecha_hora` (`id_sala`,`fecha`,`hora_inicio`),
+  ADD KEY `id_pelicula` (`id_pelicula`);
 
 --
 -- Indexes for table `funciones_asientos`
@@ -1909,12 +2048,6 @@ ALTER TABLE `funciones_asientos`
 ALTER TABLE `generos`
   ADD PRIMARY KEY (`id_genero`),
   ADD UNIQUE KEY `nombre` (`nombre`);
-
---
--- Indexes for table `horarios`
---
-ALTER TABLE `horarios`
-  ADD PRIMARY KEY (`id_horario`);
 
 --
 -- Indexes for table `membresia`
@@ -1990,25 +2123,19 @@ ALTER TABLE `descuentos`
 -- AUTO_INCREMENT for table `funciones`
 --
 ALTER TABLE `funciones`
-  MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `funciones_asientos`
 --
 ALTER TABLE `funciones_asientos`
-  MODIFY `id_boleto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_boleto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `generos`
 --
 ALTER TABLE `generos`
   MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `horarios`
---
-ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `membresia`
@@ -2020,7 +2147,7 @@ ALTER TABLE `membresia`
 -- AUTO_INCREMENT for table `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `recibos`
@@ -2056,8 +2183,7 @@ ALTER TABLE `clientes_membresias`
 --
 ALTER TABLE `funciones`
   ADD CONSTRAINT `funciones_ibfk_1` FOREIGN KEY (`id_pelicula`) REFERENCES `peliculas` (`id_pelicula`),
-  ADD CONSTRAINT `funciones_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id_sala`),
-  ADD CONSTRAINT `funciones_ibfk_3` FOREIGN KEY (`id_horario`) REFERENCES `horarios` (`id_horario`);
+  ADD CONSTRAINT `funciones_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id_sala`);
 
 --
 -- Constraints for table `funciones_asientos`
