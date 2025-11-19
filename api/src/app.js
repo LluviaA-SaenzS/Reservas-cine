@@ -3,7 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cinesRouter from "./routes/cines.js";
 import peliculasRouter from "./routes/peliculas.js";
-import horariosRouter from "./routes/horarios.js";
+import funcionesRouter from "./routes/funciones.js";
+
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ app.use(express.json());
 // Rutas
 app.use("/api/cines", cinesRouter);
 app.use("/api/peliculas", peliculasRouter);
-app.use("/api/horarios", horariosRouter);
+app.use("/api/funciones", funcionesRouter);
+
 
 const PORT = process.env.PORT || 3006;
 
