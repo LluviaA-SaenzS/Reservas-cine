@@ -4,10 +4,11 @@ import { db } from "../db.js";
 // CRUD DE FUNCIONES
 // ============================================
 
-// Obtener todas las funciones
+//----------------------------------------------------------------------------------------------------------------- Obtener todas las funciones
 export const getFunciones = async (req, res) => {
   try {
-    const [funciones] = await db.query(`
+    const { id_cine } = req.query; 
+    let query = `
       SELECT 
         f.id_funcion,
         f.fecha,
@@ -19,11 +20,15 @@ export const getFunciones = async (req, res) => {
         p.duracion_minutos,
         p.clasificacion,
         p.imagen,
+        p.idioma,
+        p.subtitulos,
         s.numero_sala,
         s.capacidad,
         s.tipo as tipo_sala,
+        c.id_cine,
         c.nombre as nombre_cine,
         c.direccion,
+        c.municipio,
         (SELECT COUNT(*) 
          FROM funciones_asientos fa 
          WHERE fa.id_funcion = f.id_funcion 
@@ -35,11 +40,23 @@ export const getFunciones = async (req, res) => {
       JOIN cines c ON s.id_cine = c.id_cine
       WHERE f.fecha >= CURDATE()
         AND f.estado = 'disponible'
-      ORDER BY f.fecha, f.hora_inicio
-    `);
+    `;
+
+    const params = [];
+
+    if (id_cine) {
+      query += ` AND c.id_cine = ?`;
+      params.push(id_cine);
+    }
+
+    query += ` ORDER BY f.fecha, f.hora_inicio`;
+
+    const [funciones] = await db.query(query, params);
 
     const funcionesConDisponibilidad = funciones.map(f => ({
       ...f,
+      idioma: JSON.parse(f.idioma || "[]"),
+      subtitulos: JSON.parse(f.subtitulos || "[]"),
       esta_llena: f.asientos_disponibles === 0,
       porcentaje_ocupacion: ((f.capacidad_total - f.asientos_disponibles) / f.capacidad_total * 100).toFixed(0)
     }));
@@ -50,8 +67,7 @@ export const getFunciones = async (req, res) => {
     res.status(500).json({ error: "Error al obtener funciones" });
   }
 };
-
-// Insertar nueva función
+//----------------------------------------------------------------------------------------------------------------- Insertar nueva función
 export const insertarFuncion = async (req, res) => {
   const connection = await db.getConnection();
   
@@ -60,7 +76,7 @@ export const insertarFuncion = async (req, res) => {
 
     await connection.beginTransaction();
 
-    // Obtener duración de la película
+    //----------------------------------------------------------------------------------------------------------------- Obtener duración de la película
     const [pelicula] = await connection.query(
       'SELECT duracion_minutos FROM peliculas WHERE id_pelicula = ?',
       [id_pelicula]
@@ -75,7 +91,7 @@ export const insertarFuncion = async (req, res) => {
     const tiempoTotal = duracionMinutos + 30;
     const horaFin = calcularHoraFin(hora_inicio, tiempoTotal);
 
-    // Validar horario del cine
+    //----------------------------------------------------------------------------------------------------------------- Validar horario del cine
     if (!validarHorarioCine(hora_inicio, horaFin)) {
       await connection.rollback();
       return res.status(400).json({ 
@@ -83,7 +99,7 @@ export const insertarFuncion = async (req, res) => {
       });
     }
 
-    // Verificar traslape
+    //----------------------------------------------------------------------------------------------------------------- Verificar traslape
     const [traslape] = await connection.query(`
       SELECT id_funcion 
       FROM funciones 
@@ -104,7 +120,7 @@ export const insertarFuncion = async (req, res) => {
       });
     }
 
-    // Insertar función
+    //----------------------------------------------------------------------------------------------------------------- Insertar función
     const [resultado] = await connection.query(`
       INSERT INTO funciones 
       (id_pelicula, id_sala, fecha, hora_inicio, hora_fin, estado, precio_base)
@@ -113,7 +129,7 @@ export const insertarFuncion = async (req, res) => {
 
     const idFuncion = resultado.insertId;
 
-    // Crear asientos para esta función
+    //----------------------------------------------------------------------------------------------------------------- Crear asientos para esta función
     await connection.query(`
       INSERT INTO funciones_asientos (id_funcion, id_asiento, disponible)
       SELECT ?, id_asiento, TRUE
@@ -126,8 +142,8 @@ export const insertarFuncion = async (req, res) => {
     res.json({ 
     message: "Función creada correctamente",
     id_funcion: idFuncion,
-    hora_inicio: hora_inicio,  // ⭐ Asegúrate de usar snake_case
-    hora_fin: horaFin          // ⭐ Cambia de horaFin a hora_fin
+    hora_inicio: hora_inicio,  
+    hora_fin: horaFin          
   });
 
   } catch (error) {
@@ -143,7 +159,7 @@ export const insertarFuncion = async (req, res) => {
 // GESTIÓN DE ASIENTOS
 // ============================================
 
-// Obtener asientos de una función
+//----------------------------------------------------------------------------------------------------------------- Obtener asientos de una función
 export const getAsientosFuncion = async (req, res) => {
   const { id_funcion } = req.params;
 
@@ -168,7 +184,7 @@ export const getAsientosFuncion = async (req, res) => {
   }
 };
 
-// Reservar asientos
+//----------------------------------------------------------------------------------------------------------------- Reservar asientos
 export const reservarAsientos = async (req, res) => {
   const connection = await db.getConnection();
   
@@ -177,7 +193,7 @@ export const reservarAsientos = async (req, res) => {
 
     await connection.beginTransaction();
 
-    // Verificar disponibilidad
+    //----------------------------------------------------------------------------------------------------------------- Verificar disponibilidad
     const [disponibles] = await connection.query(`
       SELECT id_asiento, disponible
       FROM funciones_asientos
@@ -194,7 +210,7 @@ export const reservarAsientos = async (req, res) => {
       });
     }
 
-    // Marcar como no disponibles
+    //----------------------------------------------------------------------------------------------------------------- Marcar como no disponibles
     await connection.query(`
       UPDATE funciones_asientos
       SET disponible = FALSE

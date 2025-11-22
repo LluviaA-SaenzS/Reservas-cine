@@ -1,5 +1,6 @@
 import { db } from "../db.js";
 
+//-----------------------------------------------------------------------------------------------------------------
 export const getPeliculas = async (req, res) => {
   try {
     const [rows] = await db.query(`
@@ -8,7 +9,6 @@ export const getPeliculas = async (req, res) => {
       ORDER BY fecha_estreno DESC
     `);
 
-    
     const peliculas = rows.map(p => ({
       ...p,
       idioma: JSON.parse(p.idioma || "[]"),
@@ -23,7 +23,7 @@ export const getPeliculas = async (req, res) => {
 };
 
 
-
+//-----------------------------------------------------------------------------------------------------------------
 export const insertarPelicula = async (req, res) => {
   const connection = await db.getConnection();
   try {
@@ -38,7 +38,7 @@ export const insertarPelicula = async (req, res) => {
       subtitulos
     } = req.body;
 
-    // Convertir a arrays
+    //----------------------------------------------------------------------------------------------------------------- Convertir a arrays
     const idiomaArray = Array.isArray(idioma) ? idioma : [];
     const subtitulosArray = Array.isArray(subtitulos) ? subtitulos : [];
     const generosArray = Array.isArray(generos) ? generos : [];
@@ -54,8 +54,8 @@ export const insertarPelicula = async (req, res) => {
         duracion_minutos,
         clasificacion,
         sinopsis,
-        JSON.stringify(idiomaArray),
-        JSON.stringify(subtitulosArray),
+        JSON.stringify(idioma || []),
+        JSON.stringify(subtitulos || []),
         fecha_estreno,
         req.file ? `/uploads/${req.file.filename}` : null
       ]

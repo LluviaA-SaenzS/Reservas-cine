@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cine</title>
-    <link rel="stylesheet" href="#style_index.css">
+    <link rel="stylesheet" href="style_index.css">
+    <link rel="stylesheet" href="style_cartelera.css">
 </head>
 <body>
     <header> <!-- ---------------------------------------------- CABECERA ---------------------------------------------- -->
@@ -12,13 +13,17 @@
         <nav>
             <ul>
                 <li class="nav-item">
-
-                    <button id="btnCines">Ubica tu cine</button><!-- boton -->
-
-                    <div id="menuCines" class="menu-flotante oculto">
+                    <button id="btnCines">Ubica tu cine</button>
+                <div id="menuCines" class="menu-flotante oculto">
+                    <div class="menu-header">
                         <h3>Cines disponibles</h3>
-                        <ul id="listaCines"></ul>
+                        <button id="btnVerTodos" class="btn-ver-todos">Ver todos</button>
+                        <button id="btnCerrarMenu" class="btn-cerrar">&times;</button>
                     </div>
+                    <div id="listaMunicipios" class="lista-municipios">
+                    <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
                 </li>
                     <li class="nav-item">
                         <a href="login.html">Iniciar Sesión</a> <!-- link -->
@@ -34,8 +39,14 @@
 
     <section class="seccion-principal"> <!-- ---------------------------------------------- CARETELERA | HORARIOS ---------------------------------------------- -->
         <div class="seccion-titulo">
-            <button id="btnCartelera" class="activo">Cartelera</button> |
-            <button id="btnHorarios">Horarios</button>
+            <section class="cartelera">
+  <h2>Funciones Disponibles</h2>
+  <div id="contenedor-funciones">
+    <!-- Aquí se cargarán las funciones -->
+    <p>Cargando funciones...</p>
+  </div>
+</section>
+            
         </div>
         <div id="contenidoSeccion" class="contenido-seccion">
     <!-- CONTENIDO -->
@@ -56,6 +67,27 @@
 
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/cartelera_horarios.js"></script>
+    <script src="js/funciones_cartelera.js"></script>
 </body>
 </html>
+
+
+<!--
+
+
+registro de cliente
+-formulario listo pero sin conexion ni validacion
+
+iniciar sesion
+-formulario listo pero sin conexion ni validacion
+-crear un entorno para:
+-- agregar/quitar membresia
+
+
+crear formulario para los ticket's 
+
+agregar filtros genero de la pelicula, tipo de sala, horario
+
+
+
+-->

@@ -1,9 +1,9 @@
 import express from "express";
-import { obtenerCines } from "../controllers/cinesController.js";
+import { getCines } from "../controllers/cinesController.js";
 
 const router = express.Router();
 
-router.get("/", obtenerCines);
+router.get("/", getCines);
 
 export default router;
 
