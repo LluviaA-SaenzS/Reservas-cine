@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar Boletos</title>
+    <link rel="stylesheet" href="style_compra.css">
+</head>
+<body>
+    <div class="compra-container">
+        
+        <!-- Información de la función -->
+        <section class="info-funcion">
+            <div class="pelicula-header">
+                <img id="pelicula-poster" src="" alt="Poster">
+                <div class="pelicula-info">
+                    <h1 id="pelicula-titulo"></h1>
+                    <p id="pelicula-clasificacion"></p>
+                    <p id="funcion-detalles"></p>
+                    <p id="funcion-cine"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pantalla del cine -->
+        <section class="sala-container">
+            <div class="pantalla">
+                <div class="pantalla-texto">PANTALLA</div>
+            </div>
+
+            <!-- Leyenda de asientos -->
+            <div class="leyenda">
+                <div class="leyenda-item">
+                    <div class="asiento disponible-demo"></div>
+                    <span>Disponible</span>
+                </div>
+                <div class="leyenda-item">
+                    <div class="asiento seleccionado-demo"></div>
+                    <span>Seleccionado</span>
+                </div>
+                <div class="leyenda-item">
+                    <div class="asiento ocupado-demo"></div>
+                    <span>Ocupado</span>
+                </div>
+                <div class="leyenda-item">
+                    <div class="asiento discapacitado-demo"></div>
+                    <span>Discapacitado</span>
+                </div>
+            </div>
+
+            <!-- Mapa de asientos -->
+            <div id="mapa-asientos" class="mapa-asientos">
+                <!-- Se genera dinámicamente con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Resumen de compra -->
+        <section class="resumen-compra">
+            <div class="resumen-card">
+                <h2>Resumen de compra</h2>
+                
+                <div class="asientos-seleccionados">
+                    <h3>Asientos seleccionados</h3>
+                    <div id="lista-asientos-seleccionados">
+                        <p class="texto-vacio">No has seleccionado asientos</p>
+                    </div>
+                </div>
+
+                <div class="detalle-precios">
+                    <div class="precio-linea">
+                        <span>Precio unitario:</span>
+                        <span id="precio-unitario">$0.00</span>
+                    </div>
+                    <div class="precio-linea">
+                        <span>Cantidad:</span>
+                        <span id="cantidad-boletos">0</span>
+                    </div>
+                    <div class="precio-linea">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="precio-linea descuento">
+                        <span>Descuento:</span>
+                        <span id="descuento">-$0.00</span>
+                    </div>
+                    <div class="precio-linea total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="opciones-compra">
+                    <label for="select-descuento">Código de descuento:</label>
+                    <select id="select-descuento">
+                        <option value="">Sin descuento</option>
+                        <!-- Se llena dinámicamente -->
+                    </select>
+
+                    <label for="metodo-pago">Método de pago:</label>
+                    <select id="metodo-pago" required>
+                        <option value="">Seleccione...</option>
+                        <option value="efectivo">Efectivo</option>
+                        <option value="tarjeta">Tarjeta</option>
+                        <option value="transferencia">Transferencia</option>
+                    </select>
+                </div>
+
+                <button id="btn-comprar" class="btn-comprar" disabled>
+                    Finalizar compra
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/compra.js"></script>
+</body>
+</html>

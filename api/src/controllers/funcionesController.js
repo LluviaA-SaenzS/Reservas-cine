@@ -1,5 +1,39 @@
 import { db } from "../db.js";
 
+
+export const getFuncionCompra = async (req, res) => {
+  const { id_funcion } = req.params;
+  
+  try {
+    const [funcion] = await db.query(`
+      SELECT 
+        f.*,
+        p.titulo, p.imagen, p.clasificacion, p.duracion_minutos,
+        s.numero_sala, s.tipo,
+        c.nombre as nombre_cine
+      FROM funciones f
+      JOIN peliculas p ON f.id_pelicula = p.id_pelicula
+      JOIN salas s ON f.id_sala = s.id_sala
+      JOIN cines c ON s.id_cine = c.id_cine
+      WHERE f.id_funcion = ?
+    `, [id_funcion]);
+    
+    if (!funcion.length) {
+      return res.status(404).json({ error: "Función no encontrada" });
+    }
+    
+    res.json(funcion[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener función" });
+  }
+};
+
+
+
+
+
+
 // ============================================
 // CRUD DE FUNCIONES
 // ============================================
