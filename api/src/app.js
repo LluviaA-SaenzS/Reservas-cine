@@ -10,6 +10,7 @@ import salasRouter from "./routes/salas.js";
 import recibosRouter from "./routes/recibos.js";
 import descuentosRouter from "./routes/descuentos.js";
 import comprasRouter from "./routes/compras.js";
+import clientesRouter from "./routes/clientes.js"; 
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use("/api/salas", salasRouter);
 app.use("/api/recibos", recibosRouter);
 app.use("/api/descuentos", descuentosRouter);
 app.use("/api/compras", comprasRouter); 
+app.use("/api/clientes", clientesRouter);
 
 const PORT = process.env.PORT || 3006;
 

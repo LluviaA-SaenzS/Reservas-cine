@@ -3,6 +3,7 @@
 // ============================================
 
 const API_URL = "http://localhost:3006";
+let clienteActual = null;
 let funcionSeleccionada = null;
 let asientosSeleccionados = []; // Array de objetos: { id_asiento, fila, numero }
 let precioUnitario = 0;
@@ -14,8 +15,18 @@ let descuentos = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Obtener ID de función de la URL
+  const clienteStr = localStorage.getItem("cliente");
   const params = new URLSearchParams(window.location.search);
   const idFuncion = params.get("funcion");
+
+    if (!clienteStr) {
+    alert("Debes iniciar sesión para comprar boletos");
+    window.location.href = "/login.html";
+    return;
+  }
+  
+  clienteActual = JSON.parse(clienteStr);
+  console.log("Cliente logueado:", clienteActual);
 
   if (!idFuncion) {
     alert("No se especificó una función");
@@ -283,7 +294,7 @@ async function finalizarCompra() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id_cliente: 1, // ⭐ TEMPORAL - Después obtendrás del login
+        id_cliente: clienteActual.id_cliente, 
         id_funcion: funcionSeleccionada.id_funcion,
         asientos: asientosSeleccionados.map(a => a.id_asiento),
         id_descuento: idDescuento,

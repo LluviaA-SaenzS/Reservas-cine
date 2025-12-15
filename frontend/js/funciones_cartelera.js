@@ -214,7 +214,7 @@ function agregarEventosCompra() {
       console.log("Comprar boletos para función:", idFuncion);
       alert(`Redirigiendo a compra de boletos para función ${idFuncion}`);
        window.location.href = `/frontend/comprar.html?funcion=${idFuncion}
-    });`; //?funcion=${idFuncion}
+    });`; 
     });
   });
 }
@@ -227,5 +227,3 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarFunciones();
 });
 
-// informacion de funciones_asientos -> elegir asiento,estado del asiento (disponible,ocupado)
-// crear tickect -> 

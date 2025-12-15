@@ -1,4 +1,38 @@
 // ============================================
+// VERIFICAR SESIÓN
+// ============================================
+
+function verificarSesion() {
+  const clienteStr = localStorage.getItem("cliente");
+  
+  if (clienteStr) {
+    const cliente = JSON.parse(clienteStr);
+    
+    // Mostrar nombre del usuario en el nav
+    // Asumiendo que tienes un elemento para esto
+    const userMenu = document.getElementById("user-menu");
+    if (userMenu) {
+      userMenu.innerHTML = `
+        <span>Hola, ${cliente.nombre}</span>
+        <button onclick="cerrarSesion()">Cerrar sesión</button>
+      `;
+    }
+    
+    return cliente;
+  }
+  
+  return null;
+}
+
+function cerrarSesion() {
+  localStorage.removeItem("cliente");
+  alert("Sesión cerrada");
+  window.location.reload();
+}
+
+  
+
+// ============================================
 // VARIABLES GLOBALES
 // ============================================
 
@@ -10,6 +44,7 @@ let cineSeleccionado = null; // Guardar el cine seleccionado
 
 document.addEventListener("DOMContentLoaded", async () => {
   await cargarMenuCines();
+  verificarSesion();
   configurarEventosMenu();
 });
 
