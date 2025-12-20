@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 19, 2025 at 02:40 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-12-2025 a las 06:35:06
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cinebd`
+-- Base de datos: `cinebd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asientos`
+-- Estructura de tabla para la tabla `asientos`
 --
 
 CREATE TABLE `asientos` (
@@ -36,7 +36,7 @@ CREATE TABLE `asientos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `asientos`
+-- Volcado de datos para la tabla `asientos`
 --
 
 INSERT INTO `asientos` (`id_asiento`, `id_sala`, `fila`, `numero`, `tipo_asiento`) VALUES
@@ -1560,7 +1560,7 @@ INSERT INTO `asientos` (`id_asiento`, `id_sala`, `fila`, `numero`, `tipo_asiento
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cines`
+-- Estructura de tabla para la tabla `cines`
 --
 
 CREATE TABLE `cines` (
@@ -1572,7 +1572,7 @@ CREATE TABLE `cines` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `cines`
+-- Volcado de datos para la tabla `cines`
 --
 
 INSERT INTO `cines` (`id_cine`, `nombre`, `direccion`, `municipio`, `telefono`) VALUES
@@ -1589,7 +1589,7 @@ INSERT INTO `cines` (`id_cine`, `nombre`, `direccion`, `municipio`, `telefono`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clientes`
+-- Estructura de tabla para la tabla `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -1597,36 +1597,28 @@ CREATE TABLE `clientes` (
   `nombre` varchar(50) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `telefono` varchar(15) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `fecha_registro` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `clientes_membresias`
+-- Volcado de datos para la tabla `clientes`
 --
 
-CREATE TABLE `clientes_membresias` (
-  `id_cliente_membresia` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_membresia` int(11) NOT NULL,
-  `fecha_inicio` date NOT NULL,
-  `fecha_fin` date DEFAULT NULL,
-  `estado` enum('Activa','Cancelada','Vencida','Pendiente de pago','Retrasada') DEFAULT 'Activa',
-  `monto_pagado` decimal(8,2) DEFAULT 0.00,
-  `observaciones` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellidos`, `correo`, `password`, `telefono`, `fecha_nacimiento`, `fecha_registro`) VALUES
+(1, 'Maria', 'Aguilar', 'Magu@gmail.com', '$2b$10$LGmf7T1cG2ut5o1W7Kw1s.iwspCELwZ4QhgvZGHdWh1HvF9K2auLK', '6182563856', '1998-11-22', '2025-12-14 23:30:32');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `descuentos`
+-- Estructura de tabla para la tabla `descuentos`
 --
 
 CREATE TABLE `descuentos` (
   `id_descuento` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `tipo` enum('Estudiante','Adulto Mayor','Menor de edad','Promocion') DEFAULT NULL,
   `dias_aplicables` enum('Todos los dias','Miercoles','Sabado','Domingo') DEFAULT NULL,
   `fecha_inicio` date DEFAULT NULL,
@@ -1636,18 +1628,18 @@ CREATE TABLE `descuentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `descuentos`
+-- Volcado de datos para la tabla `descuentos`
 --
 
-INSERT INTO `descuentos` (`id_descuento`, `tipo`, `dias_aplicables`, `fecha_inicio`, `fecha_fin`, `activo`, `porcentaje`) VALUES
-(1, 'Menor de edad', 'Todos los dias', NULL, NULL, 1, 37.50),
-(2, 'Estudiante', 'Todos los dias', NULL, NULL, 1, 25.00),
-(3, 'Adulto Mayor', 'Todos los dias', NULL, NULL, 1, 25.00);
+INSERT INTO `descuentos` (`id_descuento`, `nombre`, `tipo`, `dias_aplicables`, `fecha_inicio`, `fecha_fin`, `activo`, `porcentaje`) VALUES
+(1, 'Estudiante', 'Estudiante', 'Todos los dias', '2024-01-01', '2025-12-31', 1, 15.00),
+(2, 'Adulto Mayor', 'Adulto Mayor', 'Todos los dias', '2024-01-01', '2025-12-31', 1, 20.00),
+(3, 'Miércoles de Plaza', 'Promocion', 'Miercoles', '2024-01-01', '2025-12-31', 1, 30.00);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `funciones`
+-- Estructura de tabla para la tabla `funciones`
 --
 
 CREATE TABLE `funciones` (
@@ -1662,18 +1654,17 @@ CREATE TABLE `funciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `funciones`
+-- Volcado de datos para la tabla `funciones`
 --
 
 INSERT INTO `funciones` (`id_funcion`, `id_pelicula`, `id_sala`, `fecha`, `hora_inicio`, `hora_fin`, `estado`, `precio_base`) VALUES
-(1, 2, 1, '2025-11-26', '10:00:00', '11:56:00', 'disponible', 75.00),
-(2, 2, 1, '2025-11-20', '10:00:00', '11:56:00', 'disponible', 75.00),
-(3, 2, 1, '2025-11-20', '12:00:00', '13:56:00', 'disponible', 75.00);
+(1, 1, 5, '2025-11-24', '13:21:00', '15:27:00', 'disponible', 75.00),
+(2, 1, 1, '2025-12-17', '10:30:00', '12:36:00', 'disponible', 75.00);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `funciones_asientos`
+-- Estructura de tabla para la tabla `funciones_asientos`
 --
 
 CREATE TABLE `funciones_asientos` (
@@ -1684,135 +1675,85 @@ CREATE TABLE `funciones_asientos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `funciones_asientos`
+-- Volcado de datos para la tabla `funciones_asientos`
 --
 
 INSERT INTO `funciones_asientos` (`id_boleto`, `id_funcion`, `id_asiento`, `disponible`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 1),
-(3, 1, 3, 1),
-(4, 1, 4, 1),
-(5, 1, 5, 1),
-(6, 1, 6, 1),
-(7, 1, 7, 1),
-(8, 1, 8, 1),
-(9, 1, 9, 1),
-(10, 1, 10, 1),
-(11, 1, 11, 1),
-(12, 1, 12, 1),
-(13, 1, 13, 1),
-(14, 1, 14, 1),
-(15, 1, 15, 1),
-(16, 1, 16, 1),
-(17, 1, 17, 1),
-(18, 1, 18, 1),
-(19, 1, 19, 1),
-(20, 1, 20, 1),
-(21, 1, 21, 1),
-(22, 1, 22, 1),
-(23, 1, 23, 1),
-(24, 1, 24, 1),
-(25, 1, 25, 1),
-(26, 1, 26, 1),
-(27, 1, 27, 1),
-(28, 1, 28, 1),
-(29, 1, 29, 1),
-(30, 1, 30, 1),
-(31, 1, 31, 1),
-(32, 1, 32, 1),
-(33, 1, 33, 1),
-(34, 1, 34, 1),
-(35, 1, 35, 1),
-(36, 1, 36, 1),
-(37, 1, 37, 1),
-(38, 1, 38, 1),
-(39, 1, 39, 1),
-(40, 1, 40, 1),
-(64, 2, 1, 1),
-(65, 2, 2, 1),
-(66, 2, 3, 1),
-(67, 2, 4, 1),
-(68, 2, 5, 1),
-(69, 2, 6, 1),
-(70, 2, 7, 1),
-(71, 2, 8, 1),
-(72, 2, 9, 1),
-(73, 2, 10, 1),
-(74, 2, 11, 1),
-(75, 2, 12, 1),
-(76, 2, 13, 1),
-(77, 2, 14, 1),
-(78, 2, 15, 1),
-(79, 2, 16, 1),
-(80, 2, 17, 1),
-(81, 2, 18, 1),
-(82, 2, 19, 1),
-(83, 2, 20, 1),
-(84, 2, 21, 1),
-(85, 2, 22, 1),
-(86, 2, 23, 1),
-(87, 2, 24, 1),
-(88, 2, 25, 1),
-(89, 2, 26, 1),
-(90, 2, 27, 1),
-(91, 2, 28, 1),
-(92, 2, 29, 1),
-(93, 2, 30, 1),
-(94, 2, 31, 1),
-(95, 2, 32, 1),
-(96, 2, 33, 1),
-(97, 2, 34, 1),
-(98, 2, 35, 1),
-(99, 2, 36, 1),
-(100, 2, 37, 1),
-(101, 2, 38, 1),
-(102, 2, 39, 1),
-(103, 2, 40, 1),
-(127, 3, 1, 1),
-(128, 3, 2, 1),
-(129, 3, 3, 1),
-(130, 3, 4, 1),
-(131, 3, 5, 1),
-(132, 3, 6, 1),
-(133, 3, 7, 1),
-(134, 3, 8, 1),
-(135, 3, 9, 1),
-(136, 3, 10, 1),
-(137, 3, 11, 1),
-(138, 3, 12, 1),
-(139, 3, 13, 1),
-(140, 3, 14, 1),
-(141, 3, 15, 1),
-(142, 3, 16, 1),
-(143, 3, 17, 1),
-(144, 3, 18, 1),
-(145, 3, 19, 1),
-(146, 3, 20, 1),
-(147, 3, 21, 1),
-(148, 3, 22, 1),
-(149, 3, 23, 1),
-(150, 3, 24, 1),
-(151, 3, 25, 1),
-(152, 3, 26, 1),
-(153, 3, 27, 1),
-(154, 3, 28, 1),
-(155, 3, 29, 1),
-(156, 3, 30, 1),
-(157, 3, 31, 1),
-(158, 3, 32, 1),
-(159, 3, 33, 1),
-(160, 3, 34, 1),
-(161, 3, 35, 1),
-(162, 3, 36, 1),
-(163, 3, 37, 1),
-(164, 3, 38, 1),
-(165, 3, 39, 1),
-(166, 3, 40, 1);
+(1, 1, 262, 1),
+(2, 1, 264, 1),
+(3, 1, 265, 1),
+(4, 1, 266, 1),
+(5, 1, 267, 1),
+(6, 1, 263, 1),
+(7, 1, 268, 1),
+(8, 1, 272, 1),
+(9, 1, 276, 1),
+(10, 1, 280, 1),
+(11, 1, 284, 1),
+(12, 1, 288, 1),
+(13, 1, 269, 1),
+(14, 1, 273, 1),
+(15, 1, 277, 0),
+(16, 1, 281, 1),
+(17, 1, 285, 1),
+(18, 1, 289, 1),
+(19, 1, 270, 1),
+(20, 1, 274, 1),
+(21, 1, 278, 1),
+(22, 1, 282, 1),
+(23, 1, 286, 1),
+(24, 1, 290, 1),
+(25, 1, 271, 1),
+(26, 1, 275, 1),
+(27, 1, 279, 1),
+(28, 1, 283, 1),
+(29, 1, 287, 1),
+(30, 1, 291, 1),
+(31, 2, 1, 1),
+(32, 2, 2, 1),
+(33, 2, 3, 1),
+(34, 2, 4, 1),
+(35, 2, 5, 1),
+(36, 2, 6, 1),
+(37, 2, 7, 1),
+(38, 2, 8, 1),
+(39, 2, 9, 1),
+(40, 2, 10, 1),
+(41, 2, 11, 1),
+(42, 2, 12, 1),
+(43, 2, 13, 1),
+(44, 2, 14, 1),
+(45, 2, 15, 1),
+(46, 2, 16, 1),
+(47, 2, 17, 1),
+(48, 2, 18, 1),
+(49, 2, 19, 1),
+(50, 2, 20, 0),
+(51, 2, 21, 1),
+(52, 2, 22, 1),
+(53, 2, 23, 1),
+(54, 2, 24, 1),
+(55, 2, 25, 1),
+(56, 2, 26, 1),
+(57, 2, 27, 1),
+(58, 2, 28, 1),
+(59, 2, 29, 1),
+(60, 2, 30, 1),
+(61, 2, 31, 1),
+(62, 2, 32, 1),
+(63, 2, 33, 1),
+(64, 2, 34, 1),
+(65, 2, 35, 1),
+(66, 2, 36, 1),
+(67, 2, 37, 1),
+(68, 2, 38, 1),
+(69, 2, 39, 1),
+(70, 2, 40, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `generos`
+-- Estructura de tabla para la tabla `generos`
 --
 
 CREATE TABLE `generos` (
@@ -1821,7 +1762,7 @@ CREATE TABLE `generos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `generos`
+-- Volcado de datos para la tabla `generos`
 --
 
 INSERT INTO `generos` (`id_genero`, `nombre`) VALUES
@@ -1849,27 +1790,7 @@ INSERT INTO `generos` (`id_genero`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `membresia`
---
-
-CREATE TABLE `membresia` (
-  `id_membresia` int(11) NOT NULL,
-  `tipo` enum('Platino','Ninguno') DEFAULT 'Ninguno',
-  `descuento` decimal(5,2) DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `membresia`
---
-
-INSERT INTO `membresia` (`id_membresia`, `tipo`, `descuento`) VALUES
-(1, 'Ninguno', 0.00),
-(3, 'Platino', 20.50);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `peliculas`
+-- Estructura de tabla para la tabla `peliculas`
 --
 
 CREATE TABLE `peliculas` (
@@ -1885,16 +1806,16 @@ CREATE TABLE `peliculas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `peliculas`
+-- Volcado de datos para la tabla `peliculas`
 --
 
 INSERT INTO `peliculas` (`id_pelicula`, `titulo`, `duracion_minutos`, `clasificacion`, `sinopsis`, `idioma`, `subtitulos`, `fecha_estreno`, `imagen`) VALUES
-(2, 'probando', 86, 'A', 'erizo velocista azul', '[\"Espanol\",\"Inglés\"]', '[\"No\"]', '2025-11-19', '/uploads/1763513296297.webp');
+(1, 'Sonic', 96, 'AA', 'erizo azul velocista', '[\"Espanol\"]', '[\"Inglés\"]', '2025-11-23', '/uploads/1763839249288.webp');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `peliculas_generos`
+-- Estructura de tabla para la tabla `peliculas_generos`
 --
 
 CREATE TABLE `peliculas_generos` (
@@ -1903,34 +1824,62 @@ CREATE TABLE `peliculas_generos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `peliculas_generos`
+-- Volcado de datos para la tabla `peliculas_generos`
 --
 
 INSERT INTO `peliculas_generos` (`id_pelicula`, `id_genero`) VALUES
-(2, 1),
-(2, 10),
-(2, 18);
+(1, 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recibos`
+-- Estructura de tabla para la tabla `recibos`
 --
 
 CREATE TABLE `recibos` (
   `id_recibo` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `id_funcion` int(11) NOT NULL,
-  `id_asiento` int(11) NOT NULL,
   `id_descuento` int(11) DEFAULT NULL,
   `fecha_compra` datetime DEFAULT current_timestamp(),
-  `total` decimal(8,2) NOT NULL
+  `subtotal` decimal(10,2) NOT NULL,
+  `descuento_aplicado` decimal(10,2) DEFAULT 0.00,
+  `total` decimal(10,2) NOT NULL,
+  `metodo_pago` enum('efectivo','tarjeta','transferencia') NOT NULL,
+  `estado` enum('pagado','pendiente','cancelado') DEFAULT 'pagado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `recibos`
+--
+
+INSERT INTO `recibos` (`id_recibo`, `id_cliente`, `id_funcion`, `id_descuento`, `fecha_compra`, `subtotal`, `descuento_aplicado`, `total`, `metodo_pago`, `estado`) VALUES
+(3, 1, 2, 1, '2025-12-14 23:31:29', 75.00, 11.25, 63.75, 'efectivo', 'pagado');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `salas`
+-- Estructura de tabla para la tabla `recibos_detalles`
+--
+
+CREATE TABLE `recibos_detalles` (
+  `id_detalle` int(11) NOT NULL,
+  `id_recibo` int(11) NOT NULL,
+  `id_asiento` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `recibos_detalles`
+--
+
+INSERT INTO `recibos_detalles` (`id_detalle`, `id_recibo`, `id_asiento`, `precio_unitario`) VALUES
+(2, 3, 20, 75.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `salas`
 --
 
 CREATE TABLE `salas` (
@@ -1942,7 +1891,7 @@ CREATE TABLE `salas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `salas`
+-- Volcado de datos para la tabla `salas`
 --
 
 INSERT INTO `salas` (`id_sala`, `id_cine`, `numero_sala`, `capacidad`, `tipo`) VALUES
@@ -1989,53 +1938,47 @@ INSERT INTO `salas` (`id_sala`, `id_cine`, `numero_sala`, `capacidad`, `tipo`) V
 (41, 9, 4, 30, '3D');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `asientos`
+-- Indices de la tabla `asientos`
 --
 ALTER TABLE `asientos`
   ADD PRIMARY KEY (`id_asiento`),
   ADD UNIQUE KEY `id_sala` (`id_sala`,`fila`,`numero`);
 
 --
--- Indexes for table `cines`
+-- Indices de la tabla `cines`
 --
 ALTER TABLE `cines`
   ADD PRIMARY KEY (`id_cine`);
 
 --
--- Indexes for table `clientes`
+-- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
-  ADD UNIQUE KEY `correo` (`correo`);
+  ADD UNIQUE KEY `correo` (`correo`),
+  ADD KEY `idx_clientes_correo` (`correo`);
 
 --
--- Indexes for table `clientes_membresias`
---
-ALTER TABLE `clientes_membresias`
-  ADD PRIMARY KEY (`id_cliente_membresia`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_membresia` (`id_membresia`);
-
---
--- Indexes for table `descuentos`
+-- Indices de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
   ADD PRIMARY KEY (`id_descuento`);
 
 --
--- Indexes for table `funciones`
+-- Indices de la tabla `funciones`
 --
 ALTER TABLE `funciones`
   ADD PRIMARY KEY (`id_funcion`),
   ADD UNIQUE KEY `unique_sala_fecha_hora` (`id_sala`,`fecha`,`hora_inicio`),
-  ADD KEY `id_pelicula` (`id_pelicula`);
+  ADD KEY `id_pelicula` (`id_pelicula`),
+  ADD KEY `idx_funciones_fecha` (`fecha`,`estado`);
 
 --
--- Indexes for table `funciones_asientos`
+-- Indices de la tabla `funciones_asientos`
 --
 ALTER TABLE `funciones_asientos`
   ADD PRIMARY KEY (`id_boleto`),
@@ -2043,173 +1986,167 @@ ALTER TABLE `funciones_asientos`
   ADD KEY `id_asiento` (`id_asiento`);
 
 --
--- Indexes for table `generos`
+-- Indices de la tabla `generos`
 --
 ALTER TABLE `generos`
   ADD PRIMARY KEY (`id_genero`),
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indexes for table `membresia`
---
-ALTER TABLE `membresia`
-  ADD PRIMARY KEY (`id_membresia`);
-
---
--- Indexes for table `peliculas`
+-- Indices de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
   ADD PRIMARY KEY (`id_pelicula`);
 
 --
--- Indexes for table `peliculas_generos`
+-- Indices de la tabla `peliculas_generos`
 --
 ALTER TABLE `peliculas_generos`
   ADD PRIMARY KEY (`id_pelicula`,`id_genero`),
   ADD KEY `id_genero` (`id_genero`);
 
 --
--- Indexes for table `recibos`
+-- Indices de la tabla `recibos`
 --
 ALTER TABLE `recibos`
   ADD PRIMARY KEY (`id_recibo`),
-  ADD KEY `id_cliente` (`id_cliente`),
   ADD KEY `id_funcion` (`id_funcion`),
-  ADD KEY `id_asiento` (`id_asiento`),
-  ADD KEY `id_descuento` (`id_descuento`);
+  ADD KEY `id_descuento` (`id_descuento`),
+  ADD KEY `idx_recibos_cliente` (`id_cliente`,`fecha_compra`);
 
 --
--- Indexes for table `salas`
+-- Indices de la tabla `recibos_detalles`
+--
+ALTER TABLE `recibos_detalles`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD UNIQUE KEY `id_recibo` (`id_recibo`,`id_asiento`),
+  ADD KEY `id_asiento` (`id_asiento`);
+
+--
+-- Indices de la tabla `salas`
 --
 ALTER TABLE `salas`
   ADD PRIMARY KEY (`id_sala`),
   ADD KEY `id_cine` (`id_cine`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `asientos`
+-- AUTO_INCREMENT de la tabla `asientos`
 --
 ALTER TABLE `asientos`
   MODIFY `id_asiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2326;
 
 --
--- AUTO_INCREMENT for table `cines`
+-- AUTO_INCREMENT de la tabla `cines`
 --
 ALTER TABLE `cines`
   MODIFY `id_cine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `clientes_membresias`
---
-ALTER TABLE `clientes_membresias`
-  MODIFY `id_cliente_membresia` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `descuentos`
+-- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
   MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `funciones`
+-- AUTO_INCREMENT de la tabla `funciones`
 --
 ALTER TABLE `funciones`
-  MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_funcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `funciones_asientos`
+-- AUTO_INCREMENT de la tabla `funciones_asientos`
 --
 ALTER TABLE `funciones_asientos`
-  MODIFY `id_boleto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `id_boleto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
--- AUTO_INCREMENT for table `generos`
+-- AUTO_INCREMENT de la tabla `generos`
 --
 ALTER TABLE `generos`
   MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `membresia`
---
-ALTER TABLE `membresia`
-  MODIFY `id_membresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `peliculas`
+-- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `recibos`
+-- AUTO_INCREMENT de la tabla `recibos`
 --
 ALTER TABLE `recibos`
-  MODIFY `id_recibo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_recibo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `salas`
+-- AUTO_INCREMENT de la tabla `recibos_detalles`
+--
+ALTER TABLE `recibos_detalles`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `salas`
 --
 ALTER TABLE `salas`
   MODIFY `id_sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `asientos`
+-- Filtros para la tabla `asientos`
 --
 ALTER TABLE `asientos`
   ADD CONSTRAINT `asientos_ibfk_1` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id_sala`);
 
 --
--- Constraints for table `clientes_membresias`
---
-ALTER TABLE `clientes_membresias`
-  ADD CONSTRAINT `clientes_membresias_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE,
-  ADD CONSTRAINT `clientes_membresias_ibfk_2` FOREIGN KEY (`id_membresia`) REFERENCES `membresia` (`id_membresia`) ON DELETE CASCADE;
-
---
--- Constraints for table `funciones`
+-- Filtros para la tabla `funciones`
 --
 ALTER TABLE `funciones`
   ADD CONSTRAINT `funciones_ibfk_1` FOREIGN KEY (`id_pelicula`) REFERENCES `peliculas` (`id_pelicula`),
   ADD CONSTRAINT `funciones_ibfk_2` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id_sala`);
 
 --
--- Constraints for table `funciones_asientos`
+-- Filtros para la tabla `funciones_asientos`
 --
 ALTER TABLE `funciones_asientos`
   ADD CONSTRAINT `funciones_asientos_ibfk_1` FOREIGN KEY (`id_funcion`) REFERENCES `funciones` (`id_funcion`),
   ADD CONSTRAINT `funciones_asientos_ibfk_2` FOREIGN KEY (`id_asiento`) REFERENCES `asientos` (`id_asiento`);
 
 --
--- Constraints for table `peliculas_generos`
+-- Filtros para la tabla `peliculas_generos`
 --
 ALTER TABLE `peliculas_generos`
   ADD CONSTRAINT `peliculas_generos_ibfk_1` FOREIGN KEY (`id_pelicula`) REFERENCES `peliculas` (`id_pelicula`) ON DELETE CASCADE,
   ADD CONSTRAINT `peliculas_generos_ibfk_2` FOREIGN KEY (`id_genero`) REFERENCES `generos` (`id_genero`) ON DELETE CASCADE;
 
 --
--- Constraints for table `recibos`
+-- Filtros para la tabla `recibos`
 --
 ALTER TABLE `recibos`
   ADD CONSTRAINT `recibos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
   ADD CONSTRAINT `recibos_ibfk_2` FOREIGN KEY (`id_funcion`) REFERENCES `funciones` (`id_funcion`),
-  ADD CONSTRAINT `recibos_ibfk_3` FOREIGN KEY (`id_asiento`) REFERENCES `asientos` (`id_asiento`),
-  ADD CONSTRAINT `recibos_ibfk_4` FOREIGN KEY (`id_descuento`) REFERENCES `descuentos` (`id_descuento`);
+  ADD CONSTRAINT `recibos_ibfk_3` FOREIGN KEY (`id_descuento`) REFERENCES `descuentos` (`id_descuento`);
 
 --
--- Constraints for table `salas`
+-- Filtros para la tabla `recibos_detalles`
+--
+ALTER TABLE `recibos_detalles`
+  ADD CONSTRAINT `recibos_detalles_ibfk_1` FOREIGN KEY (`id_recibo`) REFERENCES `recibos` (`id_recibo`) ON DELETE CASCADE,
+  ADD CONSTRAINT `recibos_detalles_ibfk_2` FOREIGN KEY (`id_asiento`) REFERENCES `asientos` (`id_asiento`);
+
+--
+-- Filtros para la tabla `salas`
 --
 ALTER TABLE `salas`
   ADD CONSTRAINT `salas_ibfk_1` FOREIGN KEY (`id_cine`) REFERENCES `cines` (`id_cine`);
